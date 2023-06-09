@@ -3,8 +3,14 @@
     </template>
     
     <script>
+    import { products } from '../fake-data'
     export default {
         name: 'ProductDetailPage',
+        data() {
+          return {
+            product: products.find((p) => p.id === this.$route.params.id),
+          }
+        }
     }
     </script>
     
