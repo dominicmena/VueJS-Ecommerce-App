@@ -1,5 +1,9 @@
 <template>
-    <h1>This is the products detail page</h1>
+    <div id="page-wrap">
+      <div id="img-wrap">
+        <img v-bind:src="product.imageUrl"/>
+      </div>
+    </div>
     </template>
     
     <script>
