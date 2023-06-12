@@ -7,7 +7,16 @@
         <h1>{{product.name}}</h1>
         <h3 id="price">${{product.price}}</h3>
         <p>Average Rating: {{product.averageRating}}</p>
-        <button id="add-to-cart">Add to Cart</button>
+        <button 
+        id="add-to-cart"
+        v-on:click="addToCart"
+        v-if="!showSuccessMessage"
+        >Add to Cart</button>
+        <button 
+        id="add-to-cart"
+        class="green-button"
+        v-if="showSuccessMessage"
+        >Successfully Added Item To Cart!</button>
         <h4>Description</h4>
         <p>{{product.description}}</p>
       </div>
@@ -25,8 +34,21 @@
         },
         data() {
           return {
-            product: {}
+            product: {},
+            showSuccessMessage: false,
           }
+        },
+        methods: {
+          async addToCart() {
+            await axios.post('/api/users/12345/cart', {
+              productId: this.$route.params.id,
+            })
+            this.showSuccessMessage = true
+            setTimeout(() => {
+              this.$router.push('/products')
+            }, 1500)
+            
+          },
         },
         async created() {
           const result = await axios.get(`/api/products/${this.$route.params.id}`)
@@ -64,5 +86,9 @@
     position: absolute;
     top: 24px;
     right: 16px;
+  }
+
+  .green-button {
+    background-color: green;
   }
 </style>
