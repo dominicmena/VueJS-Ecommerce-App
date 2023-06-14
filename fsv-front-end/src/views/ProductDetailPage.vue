@@ -35,6 +35,7 @@
         data() {
           return {
             product: {},
+            cartItems: [],
             showSuccessMessage: false,
           }
         },
@@ -45,7 +46,7 @@
             })
             this.showSuccessMessage = true
             setTimeout(() => {
-              this.$router.push('/products')
+              this.$router.push('/cart')
             }, 1500)
             
           },
