@@ -36,7 +36,7 @@ app.get("/api/users/:userId/cart", async (req, res) => {
   );
   res.status(200).json(cartItems);
   client.close();
-});
+}); 
 
 app.get("/api/products/:productId", async (req, res) => {
   const { productId } = req.params;
