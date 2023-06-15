@@ -19,7 +19,7 @@ app.get("/api/products", async (req, res) => {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
-  const db = client.db("vue-db");
+  const db = client.db(process.env.MONGO_DBNAME || 'vue-db');
   const products = await db.collection("products").find({}).toArray();
   res.status(200).json(products);
   client.close();
@@ -31,7 +31,7 @@ app.get("/api/users/:userId/cart", async (req, res) => {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
-  const db = client.db("vue-db");
+  const db = client.db(process.env.MONGO_DBNAME || 'vue-db');
   const user = await db.collection("users").findOne({ id: userId });
   if (!user) return res.status(404).json("Could Not Find User");
   const products = await db.collection("products").find({}).toArray();
@@ -49,7 +49,7 @@ app.get("/api/products/:productId", async (req, res) => {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
-  const db = client.db("vue-db");
+  const db = client.db(process.env.MONGO_DBNAME || 'vue-db');
   const product = await db.collection('products').findOne({id: productId})
   if (product) {
     res.status(200).json(product);
@@ -66,7 +66,7 @@ app.post("/api/users/:userId/cart", async (req, res) => {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
-  const db = client.db("vue-db");
+  const db = client.db(process.env.MONGO_DBNAME || 'vue-db');
   await db.collection('users').updateOne({id: userId}, {
     $addToSet: { cartItems: productId },
   })
@@ -85,7 +85,7 @@ app.delete("/api/users/:userId/cart/:productId", async  (req, res) => {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
-  const db = client.db("vue-db");
+  const db = client.db(process.env.MONGO_DBNAME || 'vue-db');
 
   await db.collection('users').updateOne({id: userId }, {
     $pull: { cartItems: productId },
