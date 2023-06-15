@@ -21,9 +21,8 @@ app.use(history());
 
 app.get('/api/products', async (req, res) => {
   const client = await MongoClient.connect(
-    process.env.MONGO_USER && process.env.MONGO_PASS
-      ? `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0.ko5dl9a.mongodb.net/${process.env.MONGO_DBNAME}?retryWrites=true&w=majority`
-      : "mongodb://localhost:27017",
+    `mongodb+srv://menadominic:112233@cluster0.ko5dl9a.mongodb.net/vue-db?retryWrites=true&w=majority`
+    || "mongodb://localhost:27017",
     { useNewUrlParser: true, useUnifiedTopology: true }
   );
   const db = client.db(process.env.MONGO_DBNAME || "vue-db");
@@ -36,9 +35,8 @@ app.get('/api/products', async (req, res) => {
 app.get("/api/users/:userId/cart", async (req, res) => {
   const { userId } = req.params;
   const client = await MongoClient.connect(
-    process.env.MONGO_USER && process.env.MONGO_PASS
-      ? `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0.ko5dl9a.mongodb.net/${process.env.MONGO_DBNAME}?retryWrites=true&w=majority`
-      : "mongodb://localhost:27017",
+    `mongodb+srv://menadominic:112233@cluster0.ko5dl9a.mongodb.net/vue-db?retryWrites=true&w=majority`
+      || "mongodb://localhost:27017",
     { useNewUrlParser: true, useUnifiedTopology: true }
   );
   const db = client.db(process.env.MONGO_DBNAME || "vue-db");
@@ -56,9 +54,8 @@ app.get("/api/users/:userId/cart", async (req, res) => {
 app.get("/api/products/:productId", async (req, res) => {
   const { productId } = req.params;
   const client = await MongoClient.connect(
-    process.env.MONGO_USER && process.env.MONGO_PASS
-      ? `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0.ko5dl9a.mongodb.net/${process.env.MONGO_DBNAME}?retryWrites=true&w=majority`
-      : "mongodb://localhost:27017",
+    `mongodb+srv://menadominic:112233@cluster0.ko5dl9a.mongodb.net/vue-db?retryWrites=true&w=majority`
+    || "mongodb://localhost:27017",
     { useNewUrlParser: true, useUnifiedTopology: true }
   );
   const db = client.db(process.env.MONGO_DBNAME || "vue-db");
@@ -75,9 +72,8 @@ app.post("/api/users/:userId/cart", async (req, res) => {
   const { userId } = req.params;
   const { productId } = req.body;
   const client = await MongoClient.connect(
-    process.env.MONGO_USER && process.env.MONGO_PASS
-      ? `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0.ko5dl9a.mongodb.net/${process.env.MONGO_DBNAME}?retryWrites=true&w=majority`
-      : "mongodb://localhost:27017",
+    `mongodb+srv://menadominic:112233@cluster0.ko5dl9a.mongodb.net/vue-db?retryWrites=true&w=majority`
+      || "mongodb://localhost:27017",
     { useNewUrlParser: true, useUnifiedTopology: true }
   );
   const db = client.db(process.env.MONGO_DBNAME || "vue-db");
@@ -100,9 +96,8 @@ app.post("/api/users/:userId/cart", async (req, res) => {
 app.delete("/api/users/:userId/cart/:productId", async (req, res) => {
   const { userId, productId } = req.params;
   const client = await MongoClient.connect(
-    process.env.MONGO_USER && process.env.MONGO_PASS
-      ? `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0.ko5dl9a.mongodb.net/${process.env.MONGO_DBNAME}?retryWrites=true&w=majority`
-      : "mongodb://localhost:27017",
+    `mongodb+srv://menadominic:112233@cluster0.ko5dl9a.mongodb.net/vue-db?retryWrites=true&w=majority`
+      || "mongodb://localhost:27017",
     { useNewUrlParser: true, useUnifiedTopology: true }
   );
   const db = client.db(process.env.MONGO_DBNAME || "vue-db");
