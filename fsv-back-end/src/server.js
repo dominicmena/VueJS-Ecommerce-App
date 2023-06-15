@@ -14,7 +14,8 @@ app.use(express.static(path.resolve(__dirname, '../dist'), { maxAge: '1y', etag:
 app.use(history())
 
 app.get("/api/products", async (req, res) => {
-  const client = await MongoClient.connect("mongodb://localhost:27017", {
+  const client = await MongoClient.connect(
+    `mongodb+srv://menadominic:${process.env.MONGO_PASS}@cluster0.ko5dl9a.mongodb.net/${process.env.MONGO_DBNAME}?retryWrites=true&w=majority`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
@@ -26,7 +27,7 @@ app.get("/api/products", async (req, res) => {
 
 app.get("/api/users/:userId/cart", async (req, res) => {
   const { userId } = req.params;
-  const client = await MongoClient.connect("mongodb://localhost:27017", {
+  const client = await MongoClient.connect(`mongodb+srv://menadominic:${process.env.MONGO_PASS}@cluster0.ko5dl9a.mongodb.net/${process.env.MONGO_DBNAME}?retryWrites=true&w=majority`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
@@ -44,7 +45,7 @@ app.get("/api/users/:userId/cart", async (req, res) => {
 
 app.get("/api/products/:productId", async (req, res) => {
   const { productId } = req.params;
-  const client = await MongoClient.connect("mongodb://localhost:27017", {
+  const client = await MongoClient.connect(`mongodb+srv://menadominic:${process.env.MONGO_PASS}@cluster0.ko5dl9a.mongodb.net/${process.env.MONGO_DBNAME}?retryWrites=true&w=majority`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
@@ -61,7 +62,7 @@ app.get("/api/products/:productId", async (req, res) => {
 app.post("/api/users/:userId/cart", async (req, res) => {
   const {userId} = req.params
   const { productId } = req.body;
-  const client = await MongoClient.connect("mongodb://localhost:27017", {
+  const client = await MongoClient.connect(`mongodb+srv://menadominic:${process.env.MONGO_PASS}@cluster0.ko5dl9a.mongodb.net/${process.env.MONGO_DBNAME}?retryWrites=true&w=majority`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
@@ -80,7 +81,7 @@ const cartItems = cartItemIds.map(id =>
 
 app.delete("/api/users/:userId/cart/:productId", async  (req, res) => {
   const { userId, productId } = req.params;
-  const client = await MongoClient.connect("mongodb://localhost:27017", {
+  const client = await MongoClient.connect(`mongodb+srv://menadominic:${process.env.MONGO_PASS}@cluster0.ko5dl9a.mongodb.net/${process.env.MONGO_DBNAME}?retryWrites=true&w=majority`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
@@ -102,6 +103,6 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/index.html'))
 })
 
-app.listen(8000, () => {
+app.listen(process.env.VUE_APP_PORT || 8000, () => {
   console.log("Server is listening on port 8000");
 });
