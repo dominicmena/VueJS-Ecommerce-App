@@ -29,6 +29,7 @@ app.get('/api/products', async (req, res) => {
   const db = client.db(process.env.MONGO_DBNAME || "vue-db");
   const products = await db.collection("products").find({}).toArray();
   res.status(200).json(products);
+  console.log(process.env.MONGO_USER)
   client.close();
 });
 
