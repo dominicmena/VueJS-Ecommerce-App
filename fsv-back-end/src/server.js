@@ -19,7 +19,7 @@ app.use(
 );
 app.use(history());
 
-app.get("/api/products", async (req, res) => {
+app.get('/api/products', async (req, res) => {
   const client = await MongoClient.connect(
     process.env.MONGO_USER && process.env.MONGO_PASS
       ? `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0.ko5dl9a.mongodb.net/${process.env.MONGO_DBNAME}?retryWrites=true&w=majority`
