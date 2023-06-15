@@ -26,10 +26,12 @@ export default {
   },
   computed: {
     totalPrice() {
-        return this.cartItems.reduce(
-            (sum, item) => sum + Number(item.price),0
-        )
-    }
+  let sum = 0;
+  for (let i = 0; i < this.cartItems.length; i++) {
+    sum += Number(this.cartItems[i].price);
+  }
+  return sum;
+}
   },
   methods: {
     async removeFromCart(productId) {
