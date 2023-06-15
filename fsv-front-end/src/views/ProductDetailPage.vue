@@ -52,10 +52,11 @@
           },
         },
         async created() {
-          const result = await axios.get(`/api/products/${this.$route.params._id}`)
-          const product = result.data
-          this.product = product
-        }
+  const { id } = this.$route.params;
+  const result = await axios.get(`/api/products/${id}`);
+  const product = result.data;
+  this.product = product;
+}
     }
     </script>
     
