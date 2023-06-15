@@ -52,7 +52,7 @@
           },
         },
         async created() {
-          const result = await axios.get(`/api/products/${this.$route.params.id}`)
+          const result = await axios.get(`/api/products/${this.$route.params._id}`)
           const product = result.data
           this.product = product
         }
