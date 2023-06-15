@@ -18,8 +18,7 @@ export default {
   },
   async created() {
     const result = await axios.get('/api/products')
-    const products = result.data
-    this.products = products
+    this.products = result.data
   }
 };
 </script>
