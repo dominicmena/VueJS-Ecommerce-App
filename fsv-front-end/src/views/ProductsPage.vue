@@ -17,9 +17,14 @@ export default {
     };
   },
   async created() {
-    const result = await axios.get('/api/products')
-    this.products = result.data
-  }
+    try {
+      const response = await axios.get('/api/products');
+      this.products = response.data;
+    } catch (error) {
+      console.error("Error retrieving products:", error.response);
+      // You can further handle the error here, such as showing an error message or taking appropriate action
+    }
+  },
 };
 </script>
 
