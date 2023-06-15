@@ -21,9 +21,10 @@ export default {
       const response = await axios.get('/api/products');
       this.products = response.data;
     } catch (error) {
-      console.error("Error retrieving products:", error.response.data);
-      console.log("Error details:", error.response);
-      // You can further handle the error here, such as showing an error message or taking appropriate action
+      console.error("Error retrieving products:", error);
+      this.error = error.response && error.response.data && error.response.data.error
+        ? error.response.data.error.message
+        : "An error occurred while retrieving products.";
     }
   },
 };
