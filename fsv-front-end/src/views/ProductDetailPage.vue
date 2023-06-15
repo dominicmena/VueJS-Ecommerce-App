@@ -52,11 +52,10 @@
           },
         },
         async created() {
-          console.log(this.$route.params.id)
-  // const { id } = this.$route.params.id;
-  // const result = await axios.get(`/api/products/${id}`);
-  // const product = result.data;
-  // this.product = product;
+  const { id } = this.$route.params.id;
+  const result = await axios.get(`/api/products/${id}`);
+  const product = result.data;
+  this.product = product;
 }
     }
     </script>
