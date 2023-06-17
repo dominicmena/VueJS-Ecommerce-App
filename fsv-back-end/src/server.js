@@ -19,7 +19,6 @@ app.get("/api/products", async (req, res) => {
   const db = client.db("vue-db");
   const products = await db.collection("products").find({}).toArray();
   res.status(200).json(products);
-  console.log(process.env.MONGO_USER)
   client.close();
 });
 
@@ -30,7 +29,7 @@ app.get("/api/users/:userId/cart", async (req, res) => {
       || "mongodb://localhost:27017",
     { useNewUrlParser: true, useUnifiedTopology: true }
   );
-  const db = client.db(process.env.MONGO_DBNAME || "vue-db");
+  const db = client.db("vue-db");
   const user = await db.collection("users").findOne({ id: userId });
   if (!user) return res.status(404).json("Could Not Find User");
   const products = await db.collection("products").find({}).toArray();
@@ -49,7 +48,7 @@ app.get("/api/products/:productId", async (req, res) => {
     || "mongodb://localhost:27017",
     { useNewUrlParser: true, useUnifiedTopology: true }
   );
-  const db = client.db(process.env.MONGO_DBNAME || "vue-db");
+  const db = client.db("vue-db");
   const product = await db.collection("products").findOne({ id: productId });
   if (product) {
     res.status(200).json(product);
@@ -67,7 +66,7 @@ app.post("/api/users/:userId/cart", async (req, res) => {
       || "mongodb://localhost:27017",
     { useNewUrlParser: true, useUnifiedTopology: true }
   );
-  const db = client.db(process.env.MONGO_DBNAME || "vue-db");
+  const db = client.db("vue-db");
   await db.collection("users").updateOne(
     { id: userId },
     {
@@ -84,24 +83,23 @@ app.post("/api/users/:userId/cart", async (req, res) => {
   client.close();
 });
 
-<<<<<<< HEAD
-app.delete("/api/users/:userId/cart/:productId", async (req, res) => {
+app.delete("/api/users/:userId/cart/:productId", async  (req, res) => {
   const { userId, productId } = req.params;
-  const client = await MongoClient.connect(
-    `mongodb+srv://menadominic:112233@cluster0.ko5dl9a.mongodb.net/vue-db?retryWrites=true&w=majority`
-      || "mongodb://localhost:27017",
-    { useNewUrlParser: true, useUnifiedTopology: true }
-  );
-  const db = client.db(process.env.MONGO_DBNAME || "vue-db");
+  const client = await MongoClient.connect("mongodb://localhost:27017", {
+    
+  
+      useNewUrlParser: true, 
+      useUnifiedTopology: true, 
+    });
+  const db = client.db("vue-db");
 
-  await db.collection("users").updateOne(
-    { id: userId },
+  await db.collection('users').updateOne({ id: userId },
     {
       $pull: { cartItems: productId },
     }
   );
-  const user = await db.collection("users").findOne({ id: userId });
-  const products = await db.collection("products").find({}).toArray();
+  const user = await db.collection('users').findOne({ id: userId });
+  const products = await db.collection('products').find({}).toArray();
   const cartItemIds = user.cartItems;
   const cartItems = cartItemIds.map((id) =>
     products.find((product) => product.id === id)
@@ -110,9 +108,6 @@ app.delete("/api/users/:userId/cart/:productId", async (req, res) => {
   client.close();
 });
 
-=======
->>>>>>> parent of b8a43b2 (successfully routed paths to serve the dist folder and tested in browser going to localhost:8000)
 app.listen(8000, () => {
   console.log("Server is listening on port 8000");
 });
-    
