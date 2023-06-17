@@ -18,11 +18,6 @@ export default {
     components: {
         ProductsGridItem
     },
-    data() {
-  return {
-    products: [] // Example: Array of products retrieved from an API or elsewhere
-  };
-}
 }
 </script>
 

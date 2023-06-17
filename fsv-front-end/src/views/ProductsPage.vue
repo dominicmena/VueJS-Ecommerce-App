@@ -17,18 +17,10 @@ export default {
     };
   },
   async created() {
-  try {
-    const response = await axios.get('/api/products');
-    console.log(response.data); // Check the structure of the response
-    this.products = response.data;
-  } catch (error) {
-    console.error("Error retrieving products:", error);
-    this.error = error.response && error.response.data && error.response.data.error
-      ? error.response.data.error.message
-      : "An error occurred while retrieving products.";
+    const result = await axios.get('/api/products')
+    const products = result.data
+    this.products = products
   }
-},
 };
 </script>
- 
 
