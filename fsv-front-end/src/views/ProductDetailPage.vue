@@ -35,6 +35,7 @@
       data() {
         return {
           product: {},
+          cartItems: [],
           showSuccessMessage: false,
         }
       },
