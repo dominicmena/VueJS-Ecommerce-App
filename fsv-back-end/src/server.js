@@ -11,13 +11,12 @@ app.use(bodyParser.json());
 
 app.use('/images', express.static(path.join(__dirname, '../assets')))
 
-app.get('/api/products', async (req, res) => {
-  const client = await MongoClient.connect(
-    `mongodb+srv://menadominic:112233@cluster0.ko5dl9a.mongodb.net/vue-db?retryWrites=true&w=majority`
-    || "mongodb://localhost:27017",
-    { useNewUrlParser: true, useUnifiedTopology: true }
-  );
-  const db = client.db(process.env.MONGO_DBNAME || "vue-db");
+app.get("/api/products", async (req, res) => {
+  const client = await MongoClient.connect("mongodb://localhost:27017", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+  const db = client.db("vue-db");
   const products = await db.collection("products").find({}).toArray();
   res.status(200).json(products);
   console.log(process.env.MONGO_USER)
@@ -110,7 +109,7 @@ app.delete("/api/users/:userId/cart/:productId", async (req, res) => {
   client.close();
 });
 
-app.listen(8080, () => {
-  console.log("Server is listening on port 8080");
+app.listen(8000, () => {
+  console.log("Server is listening on port 8000");
 });
     
