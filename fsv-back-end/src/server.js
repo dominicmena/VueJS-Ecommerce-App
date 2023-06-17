@@ -84,6 +84,7 @@ app.post("/api/users/:userId/cart", async (req, res) => {
   client.close();
 });
 
+<<<<<<< HEAD
 app.delete("/api/users/:userId/cart/:productId", async (req, res) => {
   const { userId, productId } = req.params;
   const client = await MongoClient.connect(
@@ -109,6 +110,8 @@ app.delete("/api/users/:userId/cart/:productId", async (req, res) => {
   client.close();
 });
 
+=======
+>>>>>>> parent of b8a43b2 (successfully routed paths to serve the dist folder and tested in browser going to localhost:8000)
 app.listen(8000, () => {
   console.log("Server is listening on port 8000");
 });
